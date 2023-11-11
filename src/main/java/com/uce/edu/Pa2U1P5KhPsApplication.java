@@ -18,6 +18,7 @@ public class Pa2U1P5KhPsApplication implements CommandLineRunner {
 		System.out.println("Soy kevin Hurtado y");
 		System.out.println("Pablo Simbaña");
 		System.out.println("Cambio en la misma Rama");
+		System.out.println("Cambio taller 4");
 	}
 
 }
