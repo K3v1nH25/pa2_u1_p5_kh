@@ -43,7 +43,7 @@ public class Pa2U1P5KhPsApplication implements CommandLineRunner {
 		System.out.println(this.materia2);
 		System.out.println(this.materia1);
 		System.out.println(this.materia);
-		System.out.println();
+		
 	}
 
 }
