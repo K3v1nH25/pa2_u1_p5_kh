@@ -6,6 +6,7 @@ import com.uce.edu.transferencia.repository.modelo.Transferencia;
 
 public interface ITransferenciaService {
 	
+	//CRUD
 	public Transferencia buscar(String numero);
 	 
 	public void guardar(Transferencia transferencia);

@@ -10,7 +10,7 @@ import com.uce.edu.transferencia.repository.modelo.CuentaBancaria;
 import com.uce.edu.transferencia.repository.modelo.Transferencia;
 
 @Repository
-public class CuentaBancariaImpl implements ICuentaBancariaRepository {
+public class CuentaBancariaRepositoryImpl implements ICuentaBancariaRepository {
 
 private static List<CuentaBancaria> base = new ArrayList();
 	
@@ -19,7 +19,11 @@ private static List<CuentaBancaria> base = new ArrayList();
 		// TODO Auto-generated method stub
 		for (CuentaBancaria cuenta : base) {
 			if (cuenta.getNumero().equals(numero)) {
-				return cuenta;
+				CuentaBancaria cta = new CuentaBancaria();
+				cta.setCedulaPropiertrio(cuenta.getCedulaPropiertrio());
+				cta.setNumero(cuenta.getNumero());
+				cta.setSaldo(cuenta.getSaldo());
+				return cta;
 			}
 		}
  

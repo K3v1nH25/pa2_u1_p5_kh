@@ -9,14 +9,16 @@ public class Transferencia {
 	private LocalDateTime fecha;
 	private BigDecimal monto;
 	private String numero;
+	private CuentaBancaria cuentaOrigen;
+	private CuentaBancaria cuentaDestino;
+	
+	//Getters and Setters
 	public String getNumero() {
 		return numero;
 	}
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	private CuentaBancaria cuentaOrigen;
-	private CuentaBancaria cuentaDestino;
 	
 	//Getters and setters 
 	public LocalDateTime getFecha() {
@@ -42,6 +44,13 @@ public class Transferencia {
 	}
 	public void setCuentaDestino(CuentaBancaria cuentaDestino) {
 		this.cuentaDestino = cuentaDestino;
+	}
+	
+	//toString
+	@Override
+	public String toString() {
+		return "Transferencia [fecha=" + fecha + ", monto=" + monto + ", numero=" + numero + ", cuentaOrigen="
+				+ cuentaOrigen + ", cuentaDestino=" + cuentaDestino + "]";
 	}
 	
 	

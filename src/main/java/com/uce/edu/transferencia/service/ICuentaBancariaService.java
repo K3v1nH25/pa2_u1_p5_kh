@@ -4,7 +4,7 @@ import com.uce.edu.transferencia.repository.modelo.CuentaBancaria;
 
 public interface ICuentaBancariaService {
 	
-	public CuentaBancaria seleccionar(String numero);
+	public CuentaBancaria buscar(String numero);
 	
 	public void guardar(CuentaBancaria cuentaBancaria);
 	
