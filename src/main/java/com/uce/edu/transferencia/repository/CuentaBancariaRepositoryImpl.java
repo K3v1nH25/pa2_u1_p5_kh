@@ -29,6 +29,17 @@ private static List<CuentaBancaria> base = new ArrayList();
  
 		return null;
 	}
+	
+	public CuentaBancaria seleccionarEliminar(String numero) {
+		// TODO Auto-generated method stub
+		for (CuentaBancaria cuenta : base) {
+			if (cuenta.getNumero().equals(numero)) {
+				return cuenta;
+			}
+		}
+ 
+		return null;
+	}
  
 	@Override
 	public void insertar(CuentaBancaria cuentaBancaria) {
@@ -46,7 +57,7 @@ private static List<CuentaBancaria> base = new ArrayList();
 	@Override
 	public void eliminar(String numero) {
 		// TODO Auto-generated method stub
-		CuentaBancaria cuenta = this.seleccionar(numero);
+		CuentaBancaria cuenta = this.seleccionarEliminar(numero);
 		base.remove(cuenta);
 	}
  

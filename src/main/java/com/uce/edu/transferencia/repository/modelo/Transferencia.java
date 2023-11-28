@@ -11,6 +11,7 @@ public class Transferencia {
 	private String numero;
 	private CuentaBancaria cuentaOrigen;
 	private CuentaBancaria cuentaDestino;
+	private Transferencia trasferencia; 
 	
 	//Getters and Setters
 	public String getNumero() {
@@ -20,7 +21,6 @@ public class Transferencia {
 		this.numero = numero;
 	}
 	
-	//Getters and setters 
 	public LocalDateTime getFecha() {
 		return fecha;
 	}
