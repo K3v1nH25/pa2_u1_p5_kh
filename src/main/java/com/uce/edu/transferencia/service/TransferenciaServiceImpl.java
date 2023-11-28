@@ -2,7 +2,6 @@ package com.uce.edu.transferencia.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +13,8 @@ import com.uce.edu.transferencia.repository.modelo.Transferencia;
 
 @Service
 public class TransferenciaServiceImpl implements ITransferenciaService {
+	
+	private static Integer acumularTransferencias = 0;
 	
 	@Autowired
 	private ITransferenciaRepository iTransferenciaRepository;
@@ -48,47 +49,49 @@ public class TransferenciaServiceImpl implements ITransferenciaService {
 	@Override
 	public void realizar(String numeroOrigen, String numeroDestino, BigDecimal monto) {
 		// TODO Auto-generated method stub
-		//1.-Buscar Cta Origen
-		CuentaBancaria ctaOrigen = this.iCuentaBancariaRepository.seleccionar(numeroDestino);
-		System.out.println(ctaOrigen.hashCode());
-		//2.-Consultar saldo
-		BigDecimal saldoOrigen = ctaOrigen.getSaldo();
-		//3.-Validar saldo
-		if(saldoOrigen.compareTo(monto)>=0) {
-		//4.-Restar el monto
-		BigDecimal nuevoSaldoOrigen = saldoOrigen.subtract(monto);
-		//5.-Actualizar Cta Origen
-		ctaOrigen.setSaldo(nuevoSaldoOrigen);
-		this.iCuentaBancariaRepository.actualizar(ctaOrigen);
-		//6.-Buscar Cta Destino
-		CuentaBancaria ctaDestino = this.iCuentaBancariaRepository.seleccionar(numeroDestino);
-		System.out.println(ctaDestino.hashCode());
-		//7.-Consultar saldo
-		BigDecimal saldoDestino = ctaDestino.getSaldo();
-		//8.-Sumar el monto
-		BigDecimal nuevoSaldoDestino = saldoDestino.add(monto);
-		//9.-Actualizar Cta Destino
-		ctaDestino.setSaldo(nuevoSaldoDestino);
-		this.iCuentaBancariaRepository.actualizar(ctaDestino);
-		//10.-Crear la transferencia
-		Transferencia transferencia = new Transferencia();
-		transferencia.setCuentaOrigen(ctaOrigen);
-		transferencia.setCuentaDestino(ctaDestino);
-		transferencia.setFecha(LocalDateTime.now());
-		transferencia.setMonto(monto);
-		transferencia.setNumero("1724693112");
-		
-		this.iTransferenciaRepository.insertar(transferencia);
-		System.out.println("Transferencia realizada con Exito!");
-		}else {
-			System.out.println("Saldo no disponible");
-		}
+				//1. Buscar cuenta origen
+				CuentaBancaria ctaOrigen = this.iCuentaBancariaRepository.seleccionar(numeroOrigen);
+				//2. Consultar saldo
+				BigDecimal saldoOrigen = ctaOrigen.getSaldo();
+				//3. validar saldo
+				if(saldoOrigen.compareTo(monto)>=0) {
+				//4. restar monto	
+					BigDecimal nuevoSaldoOrigen = saldoOrigen.subtract(monto);
+				//5. Actualizar cuenta origen
+					ctaOrigen.setSaldo(nuevoSaldoOrigen);
+					this.iCuentaBancariaRepository.actualizar(ctaOrigen);
+				//6. Buscar cuenta destino
+					CuentaBancaria ctaDestino = this.iCuentaBancariaRepository.seleccionar(numeroDestino);
+				//7. Consultar  saldo
+					BigDecimal saldoDestino = ctaDestino.getSaldo();
+				//8. Sumar monto
+					BigDecimal nuevoSaldoDestino = saldoDestino.add(monto);
+				//9. actualizar cuenta destino
+					ctaDestino.setSaldo(nuevoSaldoDestino);
+					this.iCuentaBancariaRepository.actualizar(ctaDestino);
+				//10. crear transferencia
+					Transferencia transferencia = new Transferencia();
+					transferencia.setCuentaOrigen(ctaOrigen);
+					transferencia.setCuentaDestino(ctaDestino);
+					transferencia.setFecha(LocalDateTime.now());
+					transferencia.setMonto(monto);
+					transferencia.setNumero("121212121");
+					this.iTransferenciaRepository.insertar(transferencia);
+					System.out.println("Transferencia realizada con exito");
+					acumularTransferencias++;
+					
+				}else{
+					System.out.println("Saldo no disponible");
+				}
 	}
 
 	@Override
-	public List<Transferencia> seleccionarTodos() {
+	public Integer numeroTransferencias() {
 		// TODO Auto-generated method stub
-		return this.iTransferenciaRepository.seleccionarTodos();
+		return acumularTransferencias;
 	}
+
+
+
  
 }
