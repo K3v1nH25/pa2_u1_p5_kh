@@ -15,5 +15,5 @@ public interface ITransferenciaRepository {
 	
 	public void eliminar(String numero);
 	
-	public List<Transferencia> seleccionarTodos();
+	public List<Transferencia> seleccionarTodo();
 }

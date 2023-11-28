@@ -12,7 +12,7 @@ import com.uce.edu.transferencia.repository.modelo.Transferencia;
 @Repository
 public class CuentaBancariaRepositoryImpl implements ICuentaBancariaRepository {
 
-private static List<CuentaBancaria> base = new ArrayList();
+private static List<CuentaBancaria> base = new ArrayList<CuentaBancaria>();
 	
 	@Override
 	public CuentaBancaria seleccionar(String numero) {

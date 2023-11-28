@@ -44,6 +44,12 @@ public class CuentaBancariaServiceImp implements ICuentaBancariaService {
 	@Override
 	public void depositar(String numero, BigDecimal deposito) {
 		// TODO Auto-generated method stub
+		CuentaBancaria cta = this.bancariaRepository.seleccionar(numero);
+		BigDecimal saldoOrigen = cta.getSaldo();
+		cta.setSaldo(saldoOrigen.add(deposito.multiply(new BigDecimal(0.9f))));
+		this.bancariaRepository.actualizar(cta);
+		System.out.println("Deposito realizado con exito!");
+		
 	
 		
 	}

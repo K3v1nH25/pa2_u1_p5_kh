@@ -5,14 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.repository.modelo.Materia;
-import com.uce.edu.transferencia.repository.modelo.CuentaBancaria;
 import com.uce.edu.transferencia.repository.modelo.Transferencia;
 
 @Repository
 public class TrasferenciaRepositoryImpl implements ITransferenciaRepository {
 
-	private static List<Transferencia> base = new ArrayList();
+	public static List<Transferencia> base = new ArrayList<Transferencia>();
 	 
 	@Override
 	public Transferencia seleccionar(String numero) {
@@ -48,7 +46,7 @@ public class TrasferenciaRepositoryImpl implements ITransferenciaRepository {
 	}
 
 	@Override
-	public List<Transferencia> seleccionarTodos() {
+	public List<Transferencia> seleccionarTodo() {
 		// TODO Auto-generated method stub
 		return base;
 	}
