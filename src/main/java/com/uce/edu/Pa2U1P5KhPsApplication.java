@@ -16,9 +16,29 @@ import com.uce.edu.transferencia.service.ITransferenciaService;
 @SpringBootApplication
 public class Pa2U1P5KhPsApplication implements CommandLineRunner {
 	
+	//POR ATRIBUTO
 	@Autowired
 	private ITransferenciaService iTransferenciaService;
 	
+	/* DI por constructor
+	 * 
+	 * private ITransferenciaService iTransferenciaService;
+	@Autowired
+	public Pa2U1P5KhPsApplication(ITransferenciaService iTransServi) {
+		this.iTransferenciaService = iTransServi;
+	}
+	*/
+	
+	/* DI  POR METODOS
+	
+	 private ITransferenciaService iTransferenciaService;
+	 
+	@Autowired
+	public void setiTransferenciaService(ITransferenciaService iTransferenciaService) {
+		this.iTransferenciaService = iTransferenciaService;
+	}
+	*/
+
 	@Autowired
 	private ICuentaBancariaService iCuentaBancariaService;
 	
@@ -68,9 +88,6 @@ public class Pa2U1P5KhPsApplication implements CommandLineRunner {
 				
 				CuentaBancaria ctaDestino2 = this.iCuentaBancariaService.buscar("5678");
 				System.out.println(ctaDestino2);
-				
-	
-				
 	
 	}
 
