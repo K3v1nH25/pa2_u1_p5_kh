@@ -12,5 +12,4 @@ public interface IBodegaRepository {
 	public void actualizar(Bodega bodega);
 
 	public void eliminar(Bodega codigo);
-
 }
