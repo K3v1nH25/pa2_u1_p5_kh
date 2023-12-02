@@ -1,46 +1,29 @@
 package com.uce.edu;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.transferencia.repository.modelo.CuentaBancaria;
-import com.uce.edu.transferencia.repository.modelo.Transferencia;
+import com.uce.edu.inventario.repository.modelo.Bodega;
+import com.uce.edu.inventario.repository.modelo.Producto;
+import com.uce.edu.inventario.service.IBodegaService;
+import com.uce.edu.inventario.service.IInventarioService;
+import com.uce.edu.inventario.service.IProductoService;
 import com.uce.edu.transferencia.service.ICuentaBancariaService;
 import com.uce.edu.transferencia.service.ITransferenciaService;
 
 @SpringBootApplication
 public class Pa2U1P5KhPsApplication implements CommandLineRunner {
-	
-	//POR ATRIBUTO
-	@Autowired
-	private ITransferenciaService iTransferenciaService;
-	
-	/* DI por constructor
-	 * 
-	 * private ITransferenciaService iTransferenciaService;
-	@Autowired
-	public Pa2U1P5KhPsApplication(ITransferenciaService iTransServi) {
-		this.iTransferenciaService = iTransServi;
-	}
-	*/
-	
-	/* DI  POR METODOS
-	
-	 private ITransferenciaService iTransferenciaService;
-	 
-	@Autowired
-	public void setiTransferenciaService(ITransferenciaService iTransferenciaService) {
-		this.iTransferenciaService = iTransferenciaService;
-	}
-	*/
 
 	@Autowired
-	private ICuentaBancariaService iCuentaBancariaService;
+	private IProductoService iProductoService;
+	
+	@Autowired
+	private IBodegaService iBodegaService;
+	
+	@Autowired
+	private IInventarioService iInventarioService;
 	
 
 	public static void main(String[] args) {
@@ -49,46 +32,35 @@ public class Pa2U1P5KhPsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// 1. Crear las cuentas
-				CuentaBancaria ctaOrigen = new CuentaBancaria();
-				ctaOrigen.setCedulaPropiertrio("1724693112");
-				ctaOrigen.setNumero("1234");
-				ctaOrigen.setSaldo(new BigDecimal(100));
-				this.iCuentaBancariaService.guardar(ctaOrigen);
-				
-				
-				CuentaBancaria ctaDestino = new CuentaBancaria();
-				ctaDestino.setCedulaPropiertrio("1724691212");
-				ctaDestino.setNumero("5678");
-				ctaDestino.setSaldo(new BigDecimal(100));
-				this.iCuentaBancariaService.guardar(ctaDestino);
-				this.iTransferenciaService.realizar("1234", "5678", new BigDecimal(20));
-				this.iTransferenciaService.realizar("5678", "1234", new BigDecimal(10));
-				this.iTransferenciaService.realizar("1234", "5678", new BigDecimal(30));
 		
-				System.out.println("REPORTE TRANSFERENCIAS");
-				int indice = 0;
-				List<Transferencia> reporte = this.iTransferenciaService.mostrarTodas();
-				for(Transferencia trans:reporte) {
-					indice++;
-					System.out.println(indice+":"+trans);
-				}
-				
-				CuentaBancaria ctaOrigen1 = this.iCuentaBancariaService.buscar("1234");
-				System.out.println(ctaOrigen1);
-				
-				
-				CuentaBancaria ctaDestino1 = this.iCuentaBancariaService.buscar("5678");
-				System.out.println(ctaDestino1);
-				this.iCuentaBancariaService.depositar("1234", new BigDecimal(100));
-				
-				CuentaBancaria ctaOrigen2 = this.iCuentaBancariaService.buscar("1234");
-				System.out.println(ctaOrigen2);
-				
-				
-				CuentaBancaria ctaDestino2 = this.iCuentaBancariaService.buscar("5678");
-				System.out.println(ctaDestino2);
-	
+		Producto p1 = new Producto();
+		p1.setCodigoBarras("123456");
+		p1.setNombre("HP 15 laptop");
+		p1.setStock(0);
+		
+		this.iProductoService.guardar(p1);
+		
+		Producto p2 = new Producto();
+		p2.setCodigoBarras("546515646");
+		p2.setNombre("Teclado HP ");
+		p2.setStock(0);
+		
+		this.iProductoService.guardar(p2);
+		
+		Bodega b1 = new Bodega();
+		b1.setCapacidad(12);
+		b1.setCodigo("232366");
+		b1.setDireccion("Sector Alma Lojana");
+		b1.setNombre("Bodega 1");
+		
+		this.iBodegaService.guardar(b1);
+		
+		this.iInventarioService.registrar("232366", "123456", 50);
+		this.iInventarioService.registrar("232366", "546515646", 100);
+		this.iInventarioService.registrar("232366", "123456", 20);
+		
+		System.out.println(this.iProductoService.buscar("123456"));
+		System.out.println(this.iProductoService.buscar("546515646"));
 	}
 
 }
