@@ -61,6 +61,7 @@ public class Pa2U1P5KhPsApplication implements CommandLineRunner {
 		
 		System.out.println(this.iProductoService.buscar("123456"));
 		System.out.println(this.iProductoService.buscar("546515646"));
+		System.out.println();
 	}
 
 }
